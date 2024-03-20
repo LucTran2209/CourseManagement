@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<style>
+    .containerCourse {
+        display: flex;
+    }
+
+    .course {
+        width: 200px;
+        height: 350px;
+        background: #FFFFFF;
+        justify-content: center;
+        word-wrap: break-word;
+        margin: 20px;
+    }
+
+    .imgCourse img {
+        width: 200px;
+        height: 100px;
+    }
+
+</style>
+
+<div class="containerCourse">
+    @foreach (var item in ViewBag.ListCourse)
+    {
+        <div class="course">
+            <div class="imgCourse">
+                <img src="~/image/anhtruutuong.jpg" />
+            </div>
+            <div style="text-align:center">
+                <p> <a href="enrollcourse?courseId=@item.CourseId">@item.CourseTitle - @item.Semester </a></p>
+                <p><img style="width:20px; height:20px" src="~/image/enroll.png" /></p>
+            </div>            
+        </div>
+    }
+</div>

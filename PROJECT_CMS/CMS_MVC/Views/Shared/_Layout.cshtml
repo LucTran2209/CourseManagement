@@ -1,0 +1,170 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebClient</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/all.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebClient.styles.css" asp-append-version="true" />
+
+    <style>
+        .dropdown-menu.show {
+            top: 51px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="fixed-top navbar navbar-light bg-white navbar-expand moodle-has-zindex" id="yui_3_17_2_1_1710381597647_21">
+
+            <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+
+            <a asp-action="Index" asp-controller="Home" class="navbar-brand has-logo">
+                <span class="logo d-inline">                    
+                    <img class="logo-img" src="https://cmshn.fpt.edu.vn/pluginfile.php/1/core_admin/logocompact/0x70/1697438386/2020-FPTU-Eng.png" alt="eLearning">
+                </span>
+            </a>
+
+            @if (Context.Session.GetString("UserName") != null)
+            {
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="d-none d-lg-inline-flex">Manage Course</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                        <a asp-action="MyCourses" asp-controller="Course" asp-route-id="@Context.Session.GetInt32("UserId")" class="dropdown-item">My Courses</a>
+                        <a href="../course/CreateNewCourse" class="dropdown-item">Create Course</a>
+                        <a href="#" class="dropdown-item">Course 3</a>
+                    </div>
+                </div>
+            }
+
+
+
+            <ul class="nav navbar-nav ml-auto right-nav">
+                <li class="nav-item lang-menu">
+                    <span class="dropdown nav-item">
+                        <a class="nav-link" id="drop-down-65f25a1d6423965f25a1d628dc4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                            <i class="fa fa-globe"></i>
+                        </a>
+                        <session class="dropdown-menu" aria-labelledby="drop-down-65f25a1d6423965f25a1d628dc4">
+                            <a class="dropdown-item" href="#" title="English ‎(en)‎">English ‎(en)‎</a>
+                            <a class="dropdown-item" href="#" title="Vietnamese ‎(vi)‎">Vietnamese ‎(vi)‎</a>
+                        </session>
+                    </span>
+                </li>
+                <!-- navbar_plugin_output -->
+                <li class="nav-item">
+
+                </li>
+                <!-- user_menu -->
+                <li class="nav-item d-flex align-items-center">
+                    <div class="usermenu">
+                        @if (Context.Session.GetString("UserName") == null)
+                        {
+                            <span class="login">Bạn chưa đăng nhập. (<a href="/login">Đăng nhập </a>)</span>
+                        }
+                        else
+                        {
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img class="rounded-circle me-lg-2" src="~/image/anhtruutuong.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <span class="d-none d-lg-inline-flex">@Context.Session.GetString("UserName")</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                    <a href="#" class="dropdown-item">My Profile</a>
+                                    <a href="#" class="dropdown-item">Settings</a>
+                                    <a href="../Login/Logout" class="dropdown-item">Log Out</a>
+                                </div>
+                            </div>
+
+                        }
+
+
+                    </div>
+                </li>
+            </ul>
+            <!-- search_box -->
+        </nav>
+    </header>
+    <div id="wrapper">
+        <div class="overlay"></div>
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse absolute-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li><a href="#home">Home</a></li>
+                @*                 <li><a href="#about">About</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#team">Team</a></li>
+                <li class="dropdown">
+                <a href="#works" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a>
+                <ul class="dropdown-menu animated fadeInLeft" role="menu">
+                <div class="dropdown-header">Dropdown heading</div>
+                <li><a href="#pictures">Pictures</a></li>
+                <li><a href="#videos">Videeos</a></li>
+                <li><a href="#books">Books</a></li>
+                <li><a href="#art">Art</a></li>
+                <li><a href="#awards">Awards</a></li>
+                </ul>
+                </li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#followme">Follow me</a></li> *@
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            var trigger = $('.hamburger'),
+                overlay = $('.overlay'),
+                isClosed = false;
+
+            trigger.click(function () {
+                hamburger_cross();
+            });
+
+            function hamburger_cross() {
+
+                if (isClosed == true) {
+                    overlay.hide();
+                    trigger.removeClass('is-open');
+                    trigger.addClass('is-closed');
+                    isClosed = false;
+                } else {
+                    overlay.show();
+                    trigger.removeClass('is-closed');
+                    trigger.addClass('is-open');
+                    isClosed = true;
+                }
+            }
+
+            $('[data-toggle="offcanvas"]').click(function () {
+                $('#wrapper').toggleClass('toggled');
+            });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
